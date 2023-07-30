@@ -1,7 +1,7 @@
 import { Data, ErrorResponse } from "@/constants/globaltypes";
 import axios from "axios";
 
-const API_BASE_URL = process.env.VERCEL
+const API_BASE_URL = process.env.PRODUCTION
   ? `https://assessment-nextjs-page-router.vercel.app`
   : "http://localhost:3000/api";
 
