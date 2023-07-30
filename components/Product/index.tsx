@@ -10,18 +10,21 @@ export default function Product({
   onClick,
 }: Props) {
   return (
-    <div className={classes.container} onClick={onClick}>
-      <div className={classes.imageConatiner}>
+    <div
+      className="w-[48%] sm:w-[29%] h-40 grow-0 aspect-square mb-8 cursor-pointer"
+      onClick={onClick}
+    >
+      <div className="h-[90%] w-full bg-gray-200">
         <img
           src={coverImage}
-          className={classes.image}
+          className="h-full w-full object-contain"
           alt={"image for " + title}
         />
       </div>
-      <div className={classes.descriptiotnContainer}>
-        <div className={classes.titleContainer}>{title}</div>
-        <div className={classes.priceContainer}>
-          <p className={classes.discount}>{discountRate + "%"}</p>{" "}
+      <div className="flex flex-col h-10">
+        <div className="w-full h-full">{title}</div>
+        <div className="w-fullh-full flex justify-between items-center">
+          <p className="text-red-400">{discountRate + "%"}</p>{" "}
           <p>{"$" + price}</p>
         </div>
       </div>

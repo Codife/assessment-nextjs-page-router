@@ -14,11 +14,11 @@ interface DetailProps {
 export default function Detail({ bookData }: DetailProps) {
   const router = useRouter();
   return (
-    <main className={globalClasses.mainContainer}>
+    <main className="px-0 sm:px-[5%] lg:px-[20%] xl:px-[25%] 2xl:px-[30%] pb-10">
       <Header
         isDetail={true}
         title={bookData?.title ?? ""}
-        onClick={() => router.back()}
+        onClick={() => router.push('/')}
       />
       <div className={globalClasses.detailImageContainer}>
         <img
@@ -68,7 +68,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
         return { props: {} };
       }
     } catch (error) {
-      console.error("Error fetching data");
       return {
         props: {
           bookData: {},

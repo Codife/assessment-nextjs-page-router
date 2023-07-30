@@ -1,7 +1,6 @@
 import { Header, Loader, Product } from "@/components";
 import globalClasses from "@/constants/globalClasses";
 import { fetchPage } from "@/utils/services/apiService";
-import Image from "next/image";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { bookDataAtom } from "@/recoil/bookDataAtom";
@@ -60,17 +59,17 @@ export default function Home() {
   const router = useRouter();
 
   return (
-    <main className={globalClasses.mainContainer}>
+    <main className="px-0 sm:px-[5%] lg:px-[20%] xl:px-[25%] 2xl:px-[30%] pb-10">
       <Header isDetail={false} title="Books" onClick={() => null} />
-      <section className={globalClasses.productsContainer}>
+      <section className="flex justify-between flex-wrap h-full w-full xl:mb-[10%]">
         {booksData.map((book, i) => {
           return (
             <Product
               key={Math.random() * 1000}
               {...book}
               onClick={() => {
-                router.push(`/detail?bookId=${i}`);
                 setBooksData([]);
+                router.push(`/detail?bookId=${i}`);
               }}
             />
           );

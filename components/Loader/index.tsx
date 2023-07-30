@@ -1,12 +1,11 @@
 import React from "react";
-import classes from "./classnames";
 
 export default function Loader() {
   return (
-    <div role="status" className={classes.container}>
+    <div role="status" className="flex justify-center items-center mx-20">
       <svg
         aria-hidden="true"
-        className={classes.svg}
+        className= "w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
         viewBox="0 0 100 101"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -20,7 +19,7 @@ export default function Loader() {
           fill="currentFill"
         />
       </svg>
-      <span className={classes.span}>Loading...</span>
+      <span className="sr-only">Loading...</span>
     </div>
   );
 }
