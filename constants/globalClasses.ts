@@ -4,7 +4,7 @@ const classes: classnames = {
   mainContainer: "px-0 sm:px-[5%] lg:px-[20%] xl:px-[25%] 2xl:px-[30%] pb-10",
   headerContainer:
     "flex justify-center items-center relative mx-4 my-4 sm:my-8 sm:mx-0",
-  productsContainer: "flex justify-between flex-wrap h-full w-full",
+  productsContainer: "flex justify-between flex-wrap h-full w-full xl:mb-[10%]",
   heading: "text-2xl font-bold",
   topImageContainer:
     "h-10 w-10 flex justify-center items-center border-[1px] rounded-full bg-gray-200 absolute right-0",

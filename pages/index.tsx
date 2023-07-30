@@ -55,7 +55,7 @@ export default function Home() {
   return (
     <main className={globalClasses.mainContainer}>
       <Header isDetail={false} title="Books" onClick={() => null} />
-      <section className="flex justify-between flex-wrap h-full w-full">
+      <section className={globalClasses.productsContainer}>
         {booksData.map((book, i) => {
           return (
             <Product
