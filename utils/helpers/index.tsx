@@ -14,7 +14,13 @@ export const handleScroll = (
     if (!!data && "data" in data && data["data"].hasNext) {
       setCurrentPage(currentPage + 1);
       setHasFetched(false);
-    } else {
     }
   }
+};
+
+export const calculateCurrentPage = (
+  bookNumber: number,
+  booksPerPage: number
+) => {
+  return Math.floor(bookNumber / booksPerPage) + 1;
 };

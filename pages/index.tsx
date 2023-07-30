@@ -1,4 +1,4 @@
-import { Product } from "@/components";
+import { Header, Loader, Product } from "@/components";
 import globalClasses from "@/constants/globalClasses";
 import { fetchPage } from "@/utils/services/apiService";
 import Image from "next/image";
@@ -7,11 +7,12 @@ import { useEffect, useState } from "react";
 import { bookDataAtom } from "@/recoil/bookDataAtom";
 import { useRecoilState } from "recoil";
 import { handleScroll } from "@/utils/helpers";
-import Link from "next/link";
+import { useRouter } from "next/router";
 
 export default function Home() {
   const [currentPage, setCurrentPage] = useState(1);
   const [hasFetched, setHasFetched] = useState(false);
+  const [moreProductsAvailable, setMoreProductsAvailable] = useState(true);
 
   const [booksData, setBooksData] = useRecoilState(bookDataAtom);
 
@@ -23,9 +24,9 @@ export default function Home() {
 
   useEffect(() => {
     if (hasFetched) {
-      document.addEventListener("scroll", () =>
-        handleScroll(data, setCurrentPage, setHasFetched, currentPage)
-      );
+      document.addEventListener("scroll", () => {
+        handleScroll(data, setCurrentPage, setHasFetched, currentPage);
+      });
 
       return () => {
         document.removeEventListener("scroll", () =>
@@ -43,32 +44,35 @@ export default function Home() {
 
   useEffect(() => {
     if (!data) return;
-    console.log(currentPage)
     setBooksData([...booksData, ...data.data.data]);
+    if (!data.data.hasNext) {
+      setMoreProductsAvailable(false);
+    }
   }, [data]);
 
+  const router = useRouter();
+
   return (
-    <Link href="/detail">
-      <main className={globalClasses.mainContainer}>
-        <header className={globalClasses.headerContainer}>
-          <h1 className={globalClasses.heading}>Books</h1>
-          <div className={globalClasses.topImageContainer}>
-            <Image
-              src="/galleryIcon.png"
-              alt="top image"
-              width={20}
-              height={20}
+    <main className={globalClasses.mainContainer}>
+      <Header isDetail={false} title="Books" onClick={() => null} />
+      <section className="flex justify-between flex-wrap h-full w-full">
+        {booksData.map((book, i) => {
+          return (
+            <Product
+              key={Math.random() * 1000}
+              {...book}
+              onClick={() => {
+                router.push(`/detail?bookId=${i}`);
+                setBooksData([]);
+              }}
             />
-          </div>
-        </header>
-        <section className={globalClasses.productsContainer}>
-          {Array(10)
-            .fill(2)
-            .map((e) => {
-              return <Product key={Math.random() * 1000} />;
-            })}
-        </section>
-      </main>
-    </Link>
+          );
+        })}
+      </section>
+      {isLoading && <Loader />}
+      {!moreProductsAvailable && !isLoading && (
+        <div className={globalClasses.productsEnded}>No more products!</div>
+      )}
+    </main>
   );
 }

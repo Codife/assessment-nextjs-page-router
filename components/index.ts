@@ -1,3 +1,5 @@
-import Product from './Product';
+import Product from "./Product";
+import Loader from "./Loader";
+import Header from "./Header";
 
-export { Product };
+export { Product, Loader, Header };
