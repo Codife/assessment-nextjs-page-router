@@ -44,7 +44,14 @@ export default function Home() {
 
   useEffect(() => {
     if (!data) return;
-    setBooksData([...booksData, ...data.data.data]);
+    if (!Array.isArray(booksData) || !Array.isArray(data?.data?.data)) {
+      console.error("Invalid data format. Expected arrays.");
+      return;
+    }
+
+    const newData = [...booksData, ...data.data.data];
+
+    setBooksData(newData);
     if (!data.data.hasNext) {
       setMoreProductsAvailable(false);
     }
